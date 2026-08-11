@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><style>
+  @page { size: A4; margin: 11mm 14mm 10mm 14mm; }
+  * { box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Arial, Helvetica, sans-serif; font-size: 9.5pt; color: #1a1a1a; line-height: 1.36; margin: 0; }
+  .head { border-bottom: 2.5px solid #0b3d6e; padding-bottom: 6px; margin-bottom: 10px; }
+  h1 { font-size: 21pt; margin: 0 0 2px 0; color: #0b3d6e; letter-spacing: 0.5px; }
+  .titlebar { font-size: 11.5pt; font-weight: 600; color: #333; margin-bottom: 3px; }
+  .contact { font-size: 8.8pt; color: #444; }
+  h2 { font-size: 10pt; text-transform: uppercase; letter-spacing: 1px; color: #0b3d6e; border-bottom: 1px solid #b9c9d8; padding-bottom: 2px; margin: 7px 0 4px 0; }
+  ul { margin: 3px 0 4px 0; padding-left: 16px; }
+  li { margin-bottom: 2.5px; }
+  .cols { display: flex; gap: 24px; }
+  .cols > div { flex: 1; }
+  .project { margin-bottom: 5px; }
+  .projhead { font-weight: 600; font-size: 10.2pt; }
+  .status { display: inline-block; margin-left: 6px; font-size: 7.5pt; font-weight: 700; color: #fff; background: #1e7a3c; padding: 1px 6px; border-radius: 8px; vertical-align: middle; }
+  .repo { display: inline-block; margin-left: 6px; font-size: 8pt; color: #0b5a9e; vertical-align: middle; }
+  .stack { font-size: 8.2pt; color: #555; font-style: italic; margin: 1px 0 1px 0; }
+  .skillcats { font-weight: 600; color: #0b3d6e; margin-top: 4px; }
+  .one-line { margin: 2px 0; }
+  .footer { margin-top: 10px; font-size: 8.4pt; color: #444; border-top: 1px solid #ccc; padding-top: 5px; }
+</style></head><body>
+
+  <div class="head">
+    <h1>Ryan Eromosele Osagiede</h1>
+    <div class="titlebar">LLM Application Developer | AI Application Engineer</div>
+    <div class="contact">
+      Nairobi, Kenya &nbsp;·&nbsp; +254 758 840 248 &nbsp;·&nbsp; ryanosagiede4@gmail.com &nbsp;·&nbsp; GitHub: github.com/ryanreo
+    </div>
+  </div>
+<h2>Professional Summary</h2><p style="margin:3px 0 4px 0">Software Development student at KCA University building LLM-powered applications that solve real business problems. Hands-on with DeepSeek, GLM-5.2 and OpenAI-compatible APIs — prompt engineering, structured output parsing, intent classification, tool calling, and RAG over business documents. Built and published a live LLM-powered WhatsApp customer-support agent (github.com/ryanreo/ecom-support) and freelances building websites. Designs applications that turn unstructured business input into reliable, structured, automated outcomes.</p>
+<h2>Proof of Work</h2><p style="margin:3px 0 4px 0">5 AI agent prototypes focused on Kenyan business problems · 5 practical automation workflows for SMEs and freelancers · 1 live published project with GitHub repo, architecture diagram, n8n workflow export, and documentation · demo walkthroughs in progress.</p>
+<h2>Core Skills</h2>
+  <div class="cols">
+    <div>
+      <div class="skillcats">AI &amp; Automation</div><ul class="one-line"><li>LLM integration (DeepSeek, GLM-5.2, OpenAI-compatible)</li><li>Prompt engineering & system prompt design</li><li>Structured output parsing & JSON schema</li><li>Intent classification & routing</li><li>Retrieval-Augmented Generation (RAG)</li><li>Embeddings & vector search (Supabase)</li><li>Tool calling & agent orchestration</li></ul>
+    </div>
+    <div>
+      <div class="skillcats">Software Development</div><ul class="one-line"><li>JavaScript / TypeScript</li><li>Python</li><li>Node.js</li><li>HTML / CSS</li><li>REST APIs & API integration</li><li>Database design (relational + Supabase)</li></ul>
+    </div>
+  </div>
+  <div class="skillcats">Tools &amp; Platforms</div>
+  <ul class="one-line"><li>n8n · OpenClaw · DeepSeek · GLM-5.2 · Supabase · MySQL · PostgreSQL</li><li>WhatsApp Business API · Twilio · Africa’s Talking · M-Pesa Daraja API</li><li>Gmail API · Google Sheets · Google Drive · Telegram API · Slack</li></ul>
+  <div class="skillcats">Business &amp; Product</div>
+  <ul class="one-line"><li>Business process mapping</li><li>SME workflow analysis</li><li>Customer journey design</li></ul>
+
+<h2>LLM application projects</h2>
+  
+  <div class="project">
+    <div class="projhead"><span class="projtitle">Social Commerce Order Support & Returns Agent</span><span class="status">BUILT · PUBLISHED</span><span class="repo">github.com/ryanreo/ecom-support</span></div>
+    <div class="stack">n8n · DeepSeek · OpenClaw · WhatsApp · JSON store (Supabase-ready)</div>
+    <ul class=""><li>Built a WhatsApp-first AI support agent that classifies customer intent with DeepSeek and answers order-status, product, and return questions automatically from the shop’s own data.</li><li>Implemented a production n8n workflow (webhook → normalization → intent classification → per-intent reply branches) with full conversation logging, RMA tracking for returns, and human-escalation flags.</li><li>Wired an OpenClaw skill so the WhatsApp-connected agent relays customer messages to n8n and sends the reply back in seconds.</li><li>Published with architecture docs, n8n workflow export, data schema, and impact analysis — designed to cut vendor response time from hours to seconds.</li></ul>
+  </div>
+  
+  <div class="project">
+    <div class="projhead"><span class="projtitle">Jua Kali Supplier Intelligence & Trust Agent</span></div>
+    <div class="stack">n8n · GLM-5.2 · DeepSeek · Supabase · OpenClaw</div>
+    <ul class=""><li>Designed an agent that collects supplier listings from classifieds and WhatsApp, uses GLM-5.2 to flag scams and extract product/spec details, and builds a searchable supplier trust database in Supabase.</li></ul>
+  </div>
+  <div class="project">
+    <div class="projhead"><span class="projtitle">Custom Gifting & Magazine Concierge Agent</span></div>
+    <div class="stack">n8n · GLM-5.2 · Supabase · WhatsApp · M-Pesa Daraja API</div>
+    <ul class=""><li>Designed a WhatsApp concierge that captures client gift requests, generates design briefs with GLM-5.2’s long-context memory, and tracks the order from inquiry to design, payment, and delivery.</li></ul>
+  </div>
+  <div class="project">
+    <div class="projhead"><span class="projtitle">Rent Collection & Maintenance Request Agent</span></div>
+    <div class="stack">n8n · DeepSeek · Supabase · Africa’s Talking · M-Pesa Daraja API</div>
+    <ul class=""><li>Designed an SMS/USSD-first system that sends rent reminders, matches M-Pesa payments, and uses DeepSeek to categorize tenant maintenance requests into ticketed records.</li></ul>
+  </div>
+  <div class="project">
+    <div class="projhead"><span class="projtitle">Freelancer Invoice & Payment Tracker Agent</span></div>
+    <div class="stack">n8n · GLM-5.2 · DeepSeek · Gmail API · Supabase</div>
+    <ul class=""><li>Designed an invoice assistant that detects invoices in Gmail, uses GLM-5.2 to extract amount, due date, and client details, and sends automated payment reminders.</li></ul>
+  </div>
+
+<h2>Everyday Automation Workflows</h2><ul class="one-line"><li>WhatsApp lead intake & AI-qualified follow-up workflow</li><li>SME social media content generation & approval workflow</li><li>Customer support knowledge-base workflow (RAG over business documents)</li><li>Meeting notes & action-item summarizer workflow</li><li>Expense & M-Pesa transaction categorization workflow</li></ul>
+<h2>Software Development Background</h2>
+  <ul>
+    <li>Freelance web developer — built websites for clients end to end (design, development, deployment).</li>
+    <li>Built and published a production n8n + DeepSeek application (github.com/ryanreo/ecom-support) covering webhook handling, AI integration, data persistence, and documentation.</li>
+    <li>Built web-based applications using software development principles, relational database design, REST APIs, version control, and technical documentation (JavaScript/TypeScript, Python, Node.js).</li>
+  </ul>
+
+<h2>Leadership</h2><p style="margin:3px 0 4px 0">St. John’s Cadet Leader (2021) · School Prefect (2020)</p>
+<h2>Education</h2><p style="margin:3px 0 4px 0"><strong>BSc Software Development — KCA University (2023 – Present, expected 2026)</strong></p>
+<h2>Technical Toolstack</h2>
+  <div class="cols">
+    <div><div class="skillcats">Automation Stack</div><ul class="one-line"><li>n8n</li><li>OpenClaw</li><li>GLM-5.2</li><li>DeepSeek</li><li>Supabase</li><li>MySQL</li><li>PostgreSQL</li><li>REST APIs</li><li>Webhooks</li></ul></div>
+    <div><div class="skillcats">Integrations</div><ul class="one-line"><li>WhatsApp Business API</li><li>Twilio</li><li>Africa’s Talking</li><li>M-Pesa Daraja API</li><li>Gmail API</li><li>Google Sheets</li><li>Telegram API</li><li>Slack</li></ul></div>
+    <div><div class="skillcats">Development</div><ul class="one-line"><li>Git & GitHub</li><li>VS Code</li><li>Postman</li><li>Node.js</li><li>Python</li><li>JavaScript / TypeScript</li></ul></div>
+  </div>
+
+<h2>Languages</h2><p style="margin:3px 0 4px 0">English (Professional) · Swahili (Native / Professional)</p>
+<h2>Current Learning Focus</h2><p style="margin:3px 0 4px 0">LLM application development, AI agent orchestration, workflow automation, RAG systems, API integration, and AI-powered business process design.</p>
+<div class="footer">Portfolio &amp; demo videos: in progress · GitHub: github.com/ryanreo</div>
+</body></html>

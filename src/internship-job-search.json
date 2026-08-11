@@ -1,0 +1,217 @@
+{
+  "name": "Internship Job Search & Tracker",
+  "id": "e7f8a9b0-c1d2-4e3f-8a9b-0c1d2e3f4a5b",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "days",
+              "triggerAtHour": 8,
+              "triggerAtMinute": 0
+            }
+          ]
+        }
+      },
+      "id": "sched-01",
+      "name": "Daily at 08:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [-980, 0]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Search queries on MyJobMag, each mapped to the CV role it targets.\n// (Exact title queries are kept for future posts; broad queries catch current ones.)\nconst terms = [\n  { role: 'ai-workflow-engineer', term: 'AI Workflow Engineer' },\n  { role: 'n8n-automation-specialist', term: 'n8n Automation Specialist' },\n  { role: 'n8n-automation-specialist', term: 'workflow automation' },\n  { role: 'llm-application-developer', term: 'LLM Application Developer' },\n  { role: 'ai-automation-engineer', term: 'AI automation' },\n  { role: 'ai-automation-engineer', term: 'AI Automation Engineer' },\n  { role: 'ai-agent-developer', term: 'AI Agent Developer' },\n  { role: 'software-developer', term: 'Software Developer' },\n];\n\nreturn terms.map((t) => ({\n  json: {\n    role: t.role,\n    term: t.term,\n    url: 'https://www.myjobmag.co.ke/search/jobs?q=' + encodeURIComponent(t.term),\n  },\n}));"
+      },
+      "id": "gen-01",
+      "name": "Generate Search Terms",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [-780, 0]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{ $json.url }}",
+        "options": {
+          "batching": {
+            "batch": {
+              "batchSize": 1,
+              "batchInterval": 3000
+            }
+          }
+        }
+      },
+      "id": "http-01",
+      "name": "Search MyJobMag",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [-580, 0]
+    },
+    {
+      "parameters": {
+        "jsCode": "const fs = require('fs');\nconst path = require('path');\nconst DATA_DIR = 'C:/Users/osage/OneDrive/Documents/Projects/Reasonix/jobhunter/data';\nconst LEDGER = path.join(DATA_DIR, 'applications.json');\n\nlet ledger = [];\nif (fs.existsSync(LEDGER)) {\n  try { ledger = JSON.parse(fs.readFileSync(LEDGER, 'utf8')); } catch (e) { ledger = []; }\n}\nconst seen = new Set(ledger.map((j) => j.url));\n\nconst termsNode = $('Generate Search Terms');\nconst items = $input.all();\nconst jobs = [];\nfor (const it of items) {\n  const pi = it.pairedItem?.item ?? 0;\n  let role = termsNode.item(pi).json.role;\n  let term = termsNode.item(pi).json.term;\n  const json = it.json;\n  const html = typeof json.body === 'string' ? json.body : JSON.stringify(json.body ?? '');\n  if (json.error) { console.log('search failed for', term, json.error); continue; }\n  const re = /<h2><a href=\"(\\/job\\/[^\"]+)\">([^<]+)<\\/a><\\/h2>/g;\n  let m;\n  while ((m = re.exec(html)) !== null) {\n    const url = 'https://www.myjobmag.co.ke' + m[1];\n    if (seen.has(url)) continue;\n    const title = m[2].trim();\n    const companyMatch = title.match(/\\s+at\\s+(.+)$/i);\n    const company = companyMatch ? companyMatch[1].trim() : '';\n    const cleanTitle = companyMatch ? title.slice(0, title.length - companyMatch[0].length) : title;\n    seen.add(url);\n    jobs.push({ json: { role, term, title: cleanTitle, company, url, date: new Date().toISOString().slice(0, 10) } });\n  }\n}\nreturn jobs;"
+      },
+      "id": "parse-01",
+      "name": "Parse & Dedupe",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [-380, 0]
+    },
+    {
+      "parameters": {
+        "jsCode": "const CVS = 'C:/Users/osage/OneDrive/Documents/Projects/Reasonix/jobhunter/cvs';\nconst ROLE_LABEL = {\n  'ai-workflow-engineer': 'AI Workflow Engineer',\n  'n8n-automation-specialist': 'n8n Automation Specialist',\n  'llm-application-developer': 'LLM Application Developer',\n  'ai-automation-engineer': 'AI Automation Engineer',\n  'ai-agent-developer': 'AI Agent Developer',\n  'software-developer': 'Software Developer',\n};\nconst CV_FILE = {\n  'ai-workflow-engineer': 'Ryan_Osagiede_AI_Workflow_Engineer_CV_1page.pdf',\n  'n8n-automation-specialist': 'Ryan_Osagiede_n8n_Automation_Specialist_CV_1page.pdf',\n  'llm-application-developer': 'Ryan_Osagiede_LLM_Application_Developer_CV_1page.pdf',\n  'ai-automation-engineer': 'Ryan_Osagiede_AI_Automation_Engineer_CV_1page.pdf',\n  'ai-agent-developer': 'Ryan_Osagiede_AI_Agent_Developer_CV_1page.pdf',\n  'software-developer': 'Ryan_Osagiede_Software_Developer_CV_1page.pdf',\n};\n\nconst items = $input.all();\nreturn items.map((it) => {\n  const item = it.json;\n  const roleLabel = ROLE_LABEL[item.role] ?? item.role;\n  const cvFile = CVS + '/' + item.role + '/' + (CV_FILE[item.role] ?? '');\n  const subject = 'Application \\u2014 ' + roleLabel + ' Internship \\u2014 Ryan Osagiede';\n  const body = 'Dear Hiring Team,\\n\\nI am a Software Development student at KCA University building AI automation systems for Kenyan businesses. I am applying for the ' + roleLabel + ' internship at ' + (item.company || 'your company') + '.\\n\\nMy portfolio: https://github.com/ryanreo \\u2014 including a live n8n + DeepSeek AI support agent for WhatsApp. My tailored CV is attached.\\n\\nI would welcome the opportunity to discuss how I can contribute.\\n\\nKind regards,\\nRyan Eromosele Osagiede\\n+254 758 840 248 \\u00b7 ryanosagiede4@gmail.com';\n  return { json: { ...item, roleLabel, cvFile, emailSubject: subject, emailBody: body, email: '', emailSent: 'no', responded: 'no' } };\n});"
+      },
+      "id": "cv-01",
+      "name": "Attach CV & Prep Email",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [-180, 0]
+    },
+    {
+      "parameters": {
+        "resource": "sheet",
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "REPLACE_WITH_YOUR_GOOGLE_SHEET_ID",
+          "cachedResultName": "Internship Tracker (create in Google Sheets first)"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "list",
+          "value": "Tracker",
+          "cachedResultName": "Tracker"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Date Found": "={{ $json.date }}",
+            "Company": "={{ $json.company }}",
+            "Job Title": "={{ $json.title }}",
+            "URL": "={{ $json.url }}",
+            "Role": "={{ $json.roleLabel }}",
+            "CV File": "={{ $json.cvFile }}",
+            "Email": "={{ $json.email }}",
+            "Email Sent": "={{ $json.emailSent }}",
+            "Responded": "={{ $json.responded }}"
+          },
+          "matchingColumns": [],
+          "schema": []
+        },
+        "options": {}
+      },
+      "id": "sheets-01",
+      "name": "Google Sheets: Append to Tracker",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "disabled": true,
+      "position": [20, -140],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REPLACE_ME",
+          "name": "Google Sheets OAuth2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const fs = require('fs');\nconst path = require('path');\nconst DATA_DIR = 'C:/Users/osage/OneDrive/Documents/Projects/Reasonix/jobhunter/data';\nconst LEDGER = path.join(DATA_DIR, 'applications.json');\n\nconst items = $input.all().map((it) => it.json);\nconst now = new Date().toISOString();\n\n// persist all new jobs to the local ledger (source of truth until Google Sheets is enabled)\nlet ledger = [];\nif (fs.existsSync(LEDGER)) {\n  try { ledger = JSON.parse(fs.readFileSync(LEDGER, 'utf8')); } catch (e) { ledger = []; }\n}\nfor (const job of items) {\n  if (!ledger.some((l) => l.url === job.url)) {\n    ledger.push({ ...job, id: 'JOB-' + String(Date.now()).slice(-6) + '-' + ledger.length, foundAt: now, status: 'found' });\n  }\n}\nfs.writeFileSync(LEDGER, JSON.stringify(ledger, null, 2));\n\nconst count = items.length;\nlet msg = '';\nif (count === 0) {\n  msg = 'Internship check \\u2014 no new matching jobs found today. ' + ledger.length + ' tracked in total.';\n} else {\n  msg = 'Internship check \\u2014 found ' + count + ' new job' + (count > 1 ? 's' : '') + '!\\n' +\n    items.slice(0, 5).map((j) => '\\u2022 ' + j.roleLabel + ' @ ' + (j.company || j.title)).join('\\n') +\n    (count > 5 ? '\\n...and ' + (count - 5) + ' more.' : '');\n}\nreturn [{ json: { msg, newJobs: count, ledgerTotal: ledger.length } }];"
+      },
+      "id": "notify-01",
+      "name": "Compose Notification",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [20, 0]
+    },
+    {
+      "parameters": {
+        "command": "openclaw message send --channel whatsapp --target \"+254758840248\" -m \"{{ $json.msg }}\""
+      },
+      "id": "exec-01",
+      "name": "Notify via WhatsApp (OpenClaw)",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [220, 0]
+    }
+  ],
+  "connections": {
+    "Daily at 08:00": {
+      "main": [
+        [
+          {
+            "node": "Generate Search Terms",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Search Terms": {
+      "main": [
+        [
+          {
+            "node": "Search MyJobMag",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search MyJobMag": {
+      "main": [
+        [
+          {
+            "node": "Parse & Dedupe",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse & Dedupe": {
+      "main": [
+        [
+          {
+            "node": "Attach CV & Prep Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Attach CV & Prep Email": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets: Append to Tracker",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Compose Notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compose Notification": {
+      "main": [
+        [
+          {
+            "node": "Notify via WhatsApp (OpenClaw)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false
+}
