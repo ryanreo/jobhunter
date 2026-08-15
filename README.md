@@ -63,13 +63,30 @@ NODE_FUNCTION_ALLOW_BUILTIN="fs,path" NODES_EXCLUDE="[]" n8n start
    account. Use the same credential for Sheets **and** Gmail.
 2. Create a spreadsheet in Google Sheets named **Internship Tracker** with a
    sheet (tab) named **Tracker** and this header row:
-   `Date Found | Company | Job Title | URL | Role | CV File | Email | Email Sent | Responded`
+   `Date Found | Company | Job Title | URL | Role | CV File | Email | Email Sent | Responded | Status | Notes`
 3. Open the workflow, select the **Google Sheets: Append to Tracker** node,
    pick the spreadsheet + tab, map the columns, and **enable** the node.
 4. (Next build) add the Gmail send node (attach the role CV PDF, send the
    drafted email, mark `Email Sent` in Sheets) and the reply-monitor workflow
    that scans Gmail for responses and flips `Responded` — each change pings
    WhatsApp automatically.
+
+## Outcome tracking (the funnel)
+
+Every job in the ledger carries a `status` so the hunt is measurable, not just
+automated: `found → applied → replied → interview → offer → closed`.
+
+Move applications through the funnel with the helper script:
+
+```bash
+node scripts/update-application.js stats                     # funnel overview
+node scripts/update-application.js JOB-617206-0 applied      # by ledger ID
+node scripts/update-application.js <url> interview "Stage 1" # by URL + note
+```
+
+The `Status` and `Notes` columns in the Google Sheet mirror the same funnel.
+See [docs/outcome-tracking.md](docs/outcome-tracking.md) for the full guide —
+including what to do with the numbers when replies stall.
 
 ## Notes & honest limitations
 
@@ -91,6 +108,7 @@ jobhunter/
 ├── cvs/<role>/            ← 12 generated CVs (1-page + 2-page per role)
 ├── cv-generator/          ← generate.js + convert-to-pdf.sh + check-pages.js
 ├── data/applications.json ← local application ledger
-├── docs/                  ← (add concept/architecture/impact for the portfolio)
+├── docs/outcome-tracking.md ← the application funnel guide
+├── scripts/update-application.js ← move jobs through the funnel
 └── src/internship-job-search.json ← the n8n workflow
 ```

@@ -23,7 +23,7 @@ const profile = {
 const projects = {
   built: {
     title: 'Social Commerce Order Support & Returns Agent',
-    status: 'BUILT \u00b7 PUBLISHED',
+    status: 'BUILT \u00b7 LIVE DEMO',
     repo: 'github.com/ryanreo/ecom-support',
     stack: 'n8n \u00b7 DeepSeek \u00b7 OpenClaw \u00b7 WhatsApp \u00b7 JSON store (Supabase-ready)',
     bullets: [
@@ -31,6 +31,17 @@ const projects = {
       'Implemented a production n8n workflow (webhook \u2192 normalization \u2192 intent classification \u2192 per-intent reply branches) with full conversation logging, RMA tracking for returns, and human-escalation flags.',
       'Wired an OpenClaw skill so the WhatsApp-connected agent relays customer messages to n8n and sends the reply back in seconds.',
       'Published with architecture docs, n8n workflow export, data schema, and impact analysis \u2014 designed to cut vendor response time from hours to seconds.',
+    ],
+  },
+  agentLab: {
+    title: 'Agentic Workflow Lab \u2014 Self-Verifying AI Agents',
+    status: 'BUILT \u00b7 PUBLISHED',
+    repo: 'github.com/ryanreo/agentic-workflow-lab',
+    stack: 'Python (zero dependencies) \u00b7 DeepSeek \u00b7 eval harness \u00b7 interactive traces',
+    bullets: [
+      'Built an agent engine from scratch that plans, calls tools, observes results, and self-verifies in a loop \u2014 refusing to finish until its own verifier confirms the work is done.',
+      'Shipped four working agents (pipeline doctor, document extractor, deep researcher, QA agent) with a reproducible eval harness: 4/4 tasks passing on DeepSeek, measured across runs.',
+      'Published interactive step-through traces so every thought, tool call, and self-check is inspectable \u2014 the observability production agent teams rely on.',
     ],
   },
   designed: [
@@ -115,7 +126,7 @@ const roles = [
     altTitle: 'Automation Developer',
     file: 'AI_Workflow_Engineer',
     summary:
-      'Software Development student at KCA University and AI workflow engineer who designs and builds practical AI-powered automation for Kenyan businesses using n8n, OpenClaw, DeepSeek and GLM-5.2. Focused on turning manual business processes \u2014 customer support, supplier vetting, rent collection, invoicing \u2014 into reliable automated workflows with clear logging, human approval steps, and measurable operational impact. Built and published a live WhatsApp customer-support agent (github.com/ryanreo/ecom-support) and freelances building websites.',
+      'Software Development student at KCA University and AI workflow engineer who designs and builds practical AI-powered automation for Kenyan businesses using n8n, OpenClaw, DeepSeek and GLM-5.2. Focused on turning manual business processes \u2014 customer support, supplier vetting, rent collection, invoicing \u2014 into reliable automated workflows with clear logging, human approval steps, and measurable operational impact. Built and published a working WhatsApp customer-support agent \u2014 live demo (github.com/ryanreo/ecom-support) and freelances building websites.',
     skills: {
       automation: baseSkills.automation,
       tools: baseSkills.tools,
@@ -130,7 +141,7 @@ const roles = [
     altTitle: 'Workflow Automation Engineer',
     file: 'n8n_Automation_Specialist',
     summary:
-      'Software Development student at KCA University specializing in n8n workflow automation. Designs end-to-end automation pipelines \u2014 webhooks, AI/LLM steps, data transformation, scheduling, and integrations with WhatsApp, Gmail, Google Sheets, and M-Pesa \u2014 with production-grade error handling and logging. Built and published a live n8n-powered customer-support agent for WhatsApp (github.com/ryanreo/ecom-support) and freelances building websites. Focused on helping Kenyan SMEs and freelancers cut manual work and respond to customers faster.',
+      'Software Development student at KCA University specializing in n8n workflow automation. Designs end-to-end automation pipelines \u2014 webhooks, AI/LLM steps, data transformation, scheduling, and integrations with WhatsApp, Gmail, Google Sheets, and M-Pesa \u2014 with production-grade error handling and logging. Built and published a working n8n-powered customer-support agent for WhatsApp \u2014 live demo (github.com/ryanreo/ecom-support) and freelances building websites. Focused on helping Kenyan SMEs and freelancers cut manual work and respond to customers faster.',
     skills: {
       automation: [
         'n8n workflow design (webhooks, sub-workflows, error workflows)',
@@ -152,7 +163,7 @@ const roles = [
     altTitle: 'AI Application Engineer',
     file: 'LLM_Application_Developer',
     summary:
-      'Software Development student at KCA University building LLM-powered applications that solve real business problems. Hands-on with DeepSeek, GLM-5.2 and OpenAI-compatible APIs \u2014 prompt engineering, structured output parsing, intent classification, tool calling, and RAG over business documents. Built and published a live LLM-powered WhatsApp customer-support agent (github.com/ryanreo/ecom-support) and freelances building websites. Designs applications that turn unstructured business input into reliable, structured, automated outcomes.',
+      'Software Development student at KCA University building LLM-powered applications that solve real business problems. Hands-on with DeepSeek, GLM-5.2 and OpenAI-compatible APIs \u2014 prompt engineering, structured output parsing, intent classification, tool calling, and RAG over business documents. Built and published a working LLM-powered WhatsApp customer-support agent \u2014 live demo (github.com/ryanreo/ecom-support) and freelances building websites. Designs applications that turn unstructured business input into reliable, structured, automated outcomes.',
     skills: {
       automation: [
         'LLM integration (DeepSeek, GLM-5.2, OpenAI-compatible)',
@@ -175,12 +186,12 @@ const roles = [
     altTitle: 'AI Agent Developer',
     file: 'AI_Automation_Engineer',
     summary:
-      'Software Development student at KCA University building AI agents and automation systems for Kenyan SMEs, service providers, and informal-sector businesses. Combines n8n workflow orchestration, OpenClaw agent coordination, and DeepSeek/GLM-5.2 intelligence with WhatsApp, SMS, Gmail, and M-Pesa integrations to reduce manual work and improve response times. Built and published a live AI customer-support agent (github.com/ryanreo/ecom-support) and freelances building websites.',
+      'Software Development student at KCA University building AI agents and automation systems for Kenyan SMEs, service providers, and informal-sector businesses. Combines n8n workflow orchestration, OpenClaw agent coordination, and DeepSeek/GLM-5.2 intelligence with WhatsApp, SMS, Gmail, and M-Pesa integrations to reduce manual work and improve response times. Built and published a working AI customer-support agent \u2014 live demo (github.com/ryanreo/ecom-support) and freelances building websites.',
     skills: {
       automation: baseSkills.automation,
       tools: baseSkills.tools,
       dev: baseSkills.dev.slice(0, 5),
-      business: baseSkills.business,
+      business: baseSkills.business.slice(0, 3),
     },
     projectsLead: 'AI agent & automation projects',
   },
@@ -190,7 +201,8 @@ const roles = [
     altTitle: 'LLM Application Developer',
     file: 'AI_Agent_Developer',
     summary:
-      'Software Development student at KCA University who designs AI agents that do real work for Kenyan businesses \u2014 answering customers, vetting suppliers, chasing invoices, managing rentals. Strong on agent architecture, intent classification, LLM orchestration (DeepSeek, GLM-5.2), RAG, and human-in-the-loop guardrails, deployed through n8n and OpenClaw. Built and published a live WhatsApp support agent (github.com/ryanreo/ecom-support) and freelances building websites.',
+      'Software Development student at KCA University who designs AI agents that do real work for Kenyan businesses \u2014 answering customers, vetting suppliers, chasing invoices, managing rentals. Strong on agent architecture, intent classification, LLM orchestration (DeepSeek, GLM-5.2), RAG, and human-in-the-loop guardrails, deployed through n8n and OpenClaw. Built and published a working WhatsApp support agent \u2014 live demo (github.com/ryanreo/ecom-support), plus a self-verifying agent lab with an eval harness (github.com/ryanreo/agentic-workflow-lab).',
+    leadProject: 'agentlab',
     skills: {
       automation: [
         'AI agent design & orchestration',
@@ -213,7 +225,7 @@ const roles = [
     altTitle: 'JavaScript / Node.js Developer',
     file: 'Software_Developer',
     summary:
-      'Software Development student at KCA University with hands-on experience building web applications and AI-powered systems. Comfortable across the stack \u2014 JavaScript/TypeScript, Python, Node.js, HTML/CSS, relational databases, REST APIs, and Git \u2014 and able to ship complete features from database schema to UI. Built and published a full n8n + DeepSeek customer-support application (github.com/ryanreo/ecom-support) and freelances building websites for clients.',
+      'Software Development student at KCA University with hands-on experience building web applications and AI-powered systems. Comfortable across the stack \u2014 JavaScript/TypeScript, Python, Node.js, HTML/CSS, relational databases, REST APIs, and Git \u2014 and able to ship complete features from database schema to UI. Built and published a working n8n + DeepSeek customer-support application \u2014 live demo (github.com/ryanreo/ecom-support) and freelances building websites for clients.',
     skills: {
       dev: baseSkills.dev,
       automation: baseSkills.automation.slice(0, 4),
@@ -283,7 +295,7 @@ function buildFull(role) {
 </style></head><body>
 ${header(role)}
 ${section('Professional Summary', `<p style="margin:3px 0 4px 0">${esc(role.summary)}</p>`)}
-${section('Proof of Work', `<p style="margin:3px 0 4px 0">5 AI agent prototypes focused on Kenyan business problems \u00b7 5 practical automation workflows for SMEs and freelancers \u00b7 1 live published project with GitHub repo, architecture diagram, n8n workflow export, and documentation \u00b7 demo walkthroughs in progress.</p>`)}
+${section('Proof of Work', `<p style="margin:3px 0 4px 0">5 AI agent prototypes focused on Kenyan business problems \u00b7 5 practical automation workflows for SMEs and freelancers \u00b7 2 published projects with live demos, GitHub repos, architecture docs, and eval results \u00b7 demo walkthroughs in progress.</p>`)}
 ${section('Core Skills', `
   <div class="cols">
     <div>
@@ -299,7 +311,7 @@ ${section('Core Skills', `
   ${bullets(s.business, 'one-line')}
 `)}
 ${section(role.projectsLead, `
-  ${projectBlock(projects.built)}
+  ${role.leadProject === 'agentlab' ? projectBlock(projects.agentLab) + projectBlock(projects.built) : projectBlock(projects.built) + projectBlock(projects.agentLab)}
   ${projects.designed.map(projectBlock).join('')}
 `)}
 ${section('Everyday Automation Workflows', bullets(projects.workflows, 'one-line'))}
@@ -321,7 +333,7 @@ ${section('Technical Toolstack', `
 `)}
 ${section('Languages', `<p style="margin:3px 0 4px 0">${esc(profile.languages)}</p>`)}
 ${section('Current Learning Focus', `<p style="margin:3px 0 4px 0">${esc(profile.learningFocus)}</p>`)}
-<div class="footer">Portfolio &amp; demo videos: in progress \u00b7 GitHub: ${profile.github}</div>
+<div class="footer">Demo videos: in progress \u00b7 GitHub: ${profile.github}</div>
 </body></html>`;
 }
 
@@ -359,6 +371,9 @@ ${section('Selected Projects', `
   <div class="project"><span class="projtitle">${esc(projects.built.title)}</span> <span class="status">${esc(projects.built.status)}</span> <span class="repo">${esc(projects.built.repo)}</span><br>
     <span class="stack">${esc(projects.built.stack)}</span><br>
     ${esc(projects.built.bullets[0])}</div>
+  <div class="project"><span class="projtitle">${esc(projects.agentLab.title)}</span> <span class="status">${esc(projects.agentLab.status)}</span> <span class="repo">${esc(projects.agentLab.repo)}</span><br>
+    <span class="stack">${esc(projects.agentLab.stack)}</span><br>
+    ${esc(projects.agentLab.bullets[0])}</div>
   ${projects.designed.map((p) => `<div class="project"><span class="projtitle">${esc(p.title)}</span> <span class="stack">${esc(p.stack)}</span><br>${esc(p.bullets[0])}</div>`).join('')}
 `)}
 ${section('Automation Workflows', `<div class="compact" style="margin:2px 0">${projects.workflows.join(' \u00b7 ')}</div>`)}
@@ -375,7 +390,7 @@ ${section('Languages &amp; Learning', `
     <strong>Current focus:</strong> ${esc(profile.learningFocus)}
   </div>
 `)}
-<div class="footer" style="margin-top:6px; font-size:7.4pt; color:#444; border-top:1px solid #ccc; padding-top:3px;">GitHub: ${profile.github} \u00b7 Portfolio &amp; demo videos: in progress</div>
+<div class="footer" style="margin-top:6px; font-size:7.4pt; color:#444; border-top:1px solid #ccc; padding-top:3px;">GitHub: ${profile.github} \u00b7 Demo videos: in progress</div>
 </body></html>`;
 }
 

@@ -29,8 +29,8 @@
       Nairobi, Kenya &nbsp;·&nbsp; +254 758 840 248 &nbsp;·&nbsp; ryanosagiede4@gmail.com &nbsp;·&nbsp; GitHub: github.com/ryanreo
     </div>
   </div>
-<h2>Professional Summary</h2><p style="margin:3px 0 4px 0">Software Development student at KCA University who designs AI agents that do real work for Kenyan businesses — answering customers, vetting suppliers, chasing invoices, managing rentals. Strong on agent architecture, intent classification, LLM orchestration (DeepSeek, GLM-5.2), RAG, and human-in-the-loop guardrails, deployed through n8n and OpenClaw. Built and published a live WhatsApp support agent (github.com/ryanreo/ecom-support) and freelances building websites.</p>
-<h2>Proof of Work</h2><p style="margin:3px 0 4px 0">5 AI agent prototypes focused on Kenyan business problems · 5 practical automation workflows for SMEs and freelancers · 1 live published project with GitHub repo, architecture diagram, n8n workflow export, and documentation · demo walkthroughs in progress.</p>
+<h2>Professional Summary</h2><p style="margin:3px 0 4px 0">Software Development student at KCA University who designs AI agents that do real work for Kenyan businesses — answering customers, vetting suppliers, chasing invoices, managing rentals. Strong on agent architecture, intent classification, LLM orchestration (DeepSeek, GLM-5.2), RAG, and human-in-the-loop guardrails, deployed through n8n and OpenClaw. Built and published a working WhatsApp support agent — live demo (github.com/ryanreo/ecom-support), plus a self-verifying agent lab with an eval harness (github.com/ryanreo/agentic-workflow-lab).</p>
+<h2>Proof of Work</h2><p style="margin:3px 0 4px 0">5 AI agent prototypes focused on Kenyan business problems · 5 practical automation workflows for SMEs and freelancers · 2 published projects with live demos, GitHub repos, architecture docs, and eval results · demo walkthroughs in progress.</p>
 <h2>Core Skills</h2>
   <div class="cols">
     <div>
@@ -48,7 +48,12 @@
 <h2>AI agent projects</h2>
   
   <div class="project">
-    <div class="projhead"><span class="projtitle">Social Commerce Order Support & Returns Agent</span><span class="status">BUILT · PUBLISHED</span><span class="repo">github.com/ryanreo/ecom-support</span></div>
+    <div class="projhead"><span class="projtitle">Agentic Workflow Lab — Self-Verifying AI Agents</span><span class="status">BUILT · PUBLISHED</span><span class="repo">github.com/ryanreo/agentic-workflow-lab</span></div>
+    <div class="stack">Python (zero dependencies) · DeepSeek · eval harness · interactive traces</div>
+    <ul class=""><li>Built an agent engine from scratch that plans, calls tools, observes results, and self-verifies in a loop — refusing to finish until its own verifier confirms the work is done.</li><li>Shipped four working agents (pipeline doctor, document extractor, deep researcher, QA agent) with a reproducible eval harness: 4/4 tasks passing on DeepSeek, measured across runs.</li><li>Published interactive step-through traces so every thought, tool call, and self-check is inspectable — the observability production agent teams rely on.</li></ul>
+  </div>
+  <div class="project">
+    <div class="projhead"><span class="projtitle">Social Commerce Order Support & Returns Agent</span><span class="status">BUILT · LIVE DEMO</span><span class="repo">github.com/ryanreo/ecom-support</span></div>
     <div class="stack">n8n · DeepSeek · OpenClaw · WhatsApp · JSON store (Supabase-ready)</div>
     <ul class=""><li>Built a WhatsApp-first AI support agent that classifies customer intent with DeepSeek and answers order-status, product, and return questions automatically from the shop’s own data.</li><li>Implemented a production n8n workflow (webhook → normalization → intent classification → per-intent reply branches) with full conversation logging, RMA tracking for returns, and human-escalation flags.</li><li>Wired an OpenClaw skill so the WhatsApp-connected agent relays customer messages to n8n and sends the reply back in seconds.</li><li>Published with architecture docs, n8n workflow export, data schema, and impact analysis — designed to cut vendor response time from hours to seconds.</li></ul>
   </div>
@@ -93,5 +98,5 @@
 
 <h2>Languages</h2><p style="margin:3px 0 4px 0">English (Professional) · Swahili (Native / Professional)</p>
 <h2>Current Learning Focus</h2><p style="margin:3px 0 4px 0">LLM application development, AI agent orchestration, workflow automation, RAG systems, API integration, and AI-powered business process design.</p>
-<div class="footer">Portfolio &amp; demo videos: in progress · GitHub: github.com/ryanreo</div>
+<div class="footer">Demo videos: in progress · GitHub: github.com/ryanreo</div>
 </body></html>
