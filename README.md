@@ -15,6 +15,7 @@
 | AI Automation Engineer | `Ryan_Osagiede_AI_Automation_Engineer_CV_{1page,2page}.pdf` |
 | AI Agent Developer | `Ryan_Osagiede_AI_Agent_Developer_CV_{1page,2page}.pdf` |
 | Software Developer | `Ryan_Osagiede_Software_Developer_CV_{1page,2page}.pdf` |
+| AI Data Annotator / AI Evaluator | `Ryan_Osagiede_AI_Data_Annotation_Evaluation_CV_1page.pdf` (hand-written, not from the generator) |
 
 CVs are generated from `cv-generator/generate.js` (shared profile + per-role
 title/summary/skills emphasis). Regenerate + convert to PDF:
@@ -105,7 +106,7 @@ including what to do with the numbers when replies stall.
 
 ```
 jobhunter/
-├── cvs/<role>/            ← 12 generated CVs (1-page + 2-page per role)
+├── cvs/<role>/            ← 12 generated CVs (1-page + 2-page per role) + 1 hand-written data annotation CV
 ├── cv-generator/          ← generate.js + convert-to-pdf.sh + check-pages.js
 ├── data/applications.json ← local application ledger
 ├── docs/outcome-tracking.md ← the application funnel guide
